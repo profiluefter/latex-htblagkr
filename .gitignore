@@ -1,0 +1,6 @@
+.idea
+auxil
+out
+*.aux
+*.log
+*.pdf
