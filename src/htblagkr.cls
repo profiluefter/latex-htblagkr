@@ -54,16 +54,6 @@
 % https://www.overleaf.com/learn/latex/Articles/How_to_change_paragraph_spacing_in_LaTeX#The_setspace_package
 \RequirePackage[doublespacing]{setspace}
 
-% Retain title so that it can be used in the footer
-\RequirePackage{titling}
-
-% TODO: customize title
-% see docs here: https://texdoc.org/serve/titling.pdf/0
-
-% custom location metadata
-% https://tex.stackexchange.com/a/239322/229138
-\newtoks\location
-
 % setup heading
 % https://tex.stackexchange.com/a/283744/229138
 \RequirePackage[headsepline, footsepline, singlespacing=true]{scrlayer-scrpage}
@@ -73,15 +63,91 @@
 
 % https://tex.stackexchange.com/a/225277/229138
 \automark{section}
-\clearpairofpagestyles
-\ohead{\headmark}
 
-\ifoot{\thetitle}
-\ofoot{\pagemark}
+\NewDocumentCommand{\DefaultDiplPageStyle}{}{
+    \clearpairofpagestyles
+    \ohead{\headmark}
+
+    \ifoot{\thetitle}
+    \ofoot{\pagemark}
+}
+\DefaultDiplPageStyle
 
 % normal font in footer
-\setkomafont{pagefoot}{\normalfont\fontsize{9}{9}}
-\setkomafont{pagehead}{\normalfont\fontsize{9}{9}}
+\setkomafont{pagefoot}{\normalfont\fontsize{9pt}{9pt}}
+\setkomafont{pagehead}{\normalfont\fontsize{9pt}{9pt}}
+
+% Retain title so that it can be used in the footer
+\RequirePackage{titling}
+
+% custom metadata
+% https://tex.stackexchange.com/a/239322/229138
+\newtoks\location
+\newtoks\discipline
+\newtoks\schoolyear
+\newtoks\supervisor
+
+% customize title
+\RequirePackage{multicol}
+\RequirePackage{graphicx}
+\RenewDocumentCommand{\maketitle}{}{
+    \clearpairofpagestyles
+    \ihead{
+        \includegraphics{gkr-logo}
+    }
+    \chead{
+        \fontsize{15pt}{15pt}\selectfont \textbf{HTBLA Grieskirchen} \\
+        \normalsize 4710 Grieskirchen, Parzer Schulstraße 1
+    }
+    \ohead{
+        \includegraphics{htl-logo}
+    }
+    \ifoot{Abgabevermerk: \\ Datum:}
+    \ofoot{
+        \\
+        Betreuerin/Betreuer:
+    }
+
+    \begin{center}
+        \fontsize{12pt}{12pt}\selectfont \textbf{Fachrichtung \the\discipline}
+
+        \vspace{2cm}
+
+        \fontsize{11pt}{11pt}\selectfont \textbf{Schuljahr \the\schoolyear}
+
+        \vspace{3cm}
+
+        \fontsize{30pt}{30pt}\selectfont \textbf{DIPLOMARBEIT}
+
+        \fontsize{16pt}{16pt}\selectfont Gesamtprojekt
+
+        \parbox[t][4cm][t]{13cm}{
+            \begin{center}
+                \fontsize{36pt}{36pt}\selectfont \textbf{\thetitle}
+            \end{center}
+        }
+    \end{center}
+
+    \setlength{\columnsep}{2cm}
+    \begin{multicols}{2}
+
+        \textbf{Ausgeführt von:} \\
+        \theauthor
+
+        \columnbreak
+
+        \textbf{Betreuerin/Betreuer:} \\
+        \the\supervisor
+    \end{multicols}
+
+    \vspace{4cm}
+
+    \the\location, am \thedate
+
+    \clearpage
+
+    \DefaultDiplPageStyle
+}
 
 % font spacing
 % TODO: fix this
