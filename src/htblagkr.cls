@@ -18,13 +18,12 @@
     left=3.5cm,
     right=2.5cm,
     top=2.5cm,
-    bottom=2.5cm,
-    head=25pt, % not sure what this does but scrlayer-scrpage wants it (console warning)
-    foot=25pt % same reason as above but actually moves the footer up which is closer to the template
+    bottom=3.5cm,
+    head=25pt,
+    foot=25pt
 ]{geometry}
+\setlength{\voffset}{1cm}
 
-% TODO: fix header and footer being in required page border
-% see geometry package docs here: https://texdoc.org/serve/geometry.pdf/0
 
 % calibri font
 \RequirePackage{fontspec}
