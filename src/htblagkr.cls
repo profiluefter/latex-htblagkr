@@ -94,10 +94,15 @@
 % custom author information
 \NewDocumentCommand{\titlepageauthors}{}{}
 \NewDocumentCommand{\affidavitauthors}{}{}
-\RenewDocumentCommand{\author}{mmO{\vspace{5mm}}}{
+\RenewDocumentCommand{\author}{mmO{\vspace{3cm}}}{
     \makeatletter
     \g@addto@macro\titlepageauthors{#1, #2\\}
-    \g@addto@macro\affidavitauthors{#1\\#3\\}
+    \g@addto@macro\affidavitauthors{
+        \normalsize#3\vspace{-1cm} \\
+        \hrule \\
+        \small#1 \\
+        \vspace{1cm} \\
+    }
     \makeatother
 }
 
@@ -166,7 +171,7 @@
 }
 
 % custom affidavit
-\newcommand{\affidavit}{
+\NewDocumentCommand{\affidavit}{}{
     \clearpage
     \thispagestyle{empty}
 
