@@ -24,6 +24,8 @@
 ]{geometry}
 \setlength{\voffset}{1cm}
 
+% custom commands
+\RequirePackage{xpatch}
 
 % calibri font
 \RequirePackage{fontspec}
@@ -31,6 +33,9 @@
 
 % german
 \RequirePackage[ngerman]{babel}
+
+% quotation marks
+\RequirePackage{csquotes}
 
 % replaced by class option parskip
 %\RequirePackage{parskip}
@@ -76,7 +81,7 @@
 \setkomafont{pagefoot}{\normalfont\fontsize{9pt}{9pt}}
 \setkomafont{pagehead}{\normalfont\fontsize{9pt}{9pt}}
 
-% Retain title so that it can be used in the footer
+% Retain title and date so that it can be used in custom places
 \RequirePackage{titling}
 
 % custom metadata
@@ -86,10 +91,22 @@
 \newtoks\schoolyear
 \newtoks\supervisor
 
+% custom author information
+\NewDocumentCommand{\titlepageauthors}{}{}
+\NewDocumentCommand{\affidavitauthors}{}{}
+\RenewDocumentCommand{\author}{mmO{\vspace{5mm}}}{
+    \makeatletter
+    \g@addto@macro\titlepageauthors{#1, #2\\}
+    \g@addto@macro\affidavitauthors{#1\\#3\\}
+    \makeatother
+}
+
 % customize title
 \RequirePackage{multicol}
 \RequirePackage{graphicx}
 \RenewDocumentCommand{\maketitle}{}{
+    \clearpage
+
     \clearpairofpagestyles
     \ihead{
         \includegraphics{gkr-logo}
@@ -120,9 +137,9 @@
 
         \fontsize{16pt}{16pt}\selectfont Gesamtprojekt
 
-        \parbox[t][4cm][t]{13cm}{
+        \parbox[t][3.5cm][t]{13cm}{
             \begin{center}
-                \fontsize{36pt}{36pt}\selectfont \textbf{\thetitle}
+                \fontsize{36pt}{26pt}\selectfont \textbf{\thetitle}
             \end{center}
         }
     \end{center}
@@ -131,7 +148,7 @@
     \begin{multicols}{2}
 
         \textbf{Ausgeführt von:} \\
-        \theauthor
+        \titlepageauthors
 
         \columnbreak
 
@@ -139,13 +156,35 @@
         \the\supervisor
     \end{multicols}
 
-    \vspace{4cm}
+    \vspace{3cm}
 
     \the\location, am \thedate
 
     \clearpage
 
     \DefaultDiplPageStyle
+}
+
+% custom affidavit
+\newcommand{\affidavit}{
+    \clearpage
+    \thispagestyle{empty}
+
+    \textbf{Erklärung gemäß Prüfungsordnung}
+
+    \enquote{Ich erkläre an Eides statt, dass ich die vorliegende Diplomarbeit selbstständig und ohne fremde Hilfe verfasst,  andere als die angegebenen Quellen und Hilfsmittel nicht benutzt und alle den benutzten Quellen wörtlich entnommenen Stellen als solche kenntlich gemacht habe.}
+
+    \begin{multicols}{2}
+        \the\location, \thedate
+
+        \columnbreak
+
+        Verfasserinnen/Verfasser:
+
+        \affidavitauthors
+    \end{multicols}
+
+    \clearpage
 }
 
 % font spacing
@@ -168,7 +207,6 @@
     afterskip=12bp
 ]{paragraph}
 
-\RequirePackage{xpatch}
 \makeatletter
 \At@startsection{\addtolength{\@tempskipa}{-\parskip}}
 \xpatchcmd{\@xsect}{\vskip\@tempskipa}{\vskip\dimexpr\@tempskipa-\parskip\relax}{}{}
