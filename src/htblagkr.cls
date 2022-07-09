@@ -90,10 +90,14 @@
 \newtoks\discipline
 \newtoks\schoolyear
 \newtoks\supervisor
+\newtoks\partnercompany
 
 % custom author information
 \NewDocumentCommand{\titlepageauthors}{}{}
 \NewDocumentCommand{\affidavitauthors}{}{}
+\NewDocumentCommand{\abstractauthors}{}{}
+
+\RequirePackage{ifthen}
 \RenewDocumentCommand{\author}{mmO{\vspace{3cm}}}{
     \makeatletter
     \g@addto@macro\titlepageauthors{#1, #2\\}
@@ -103,6 +107,12 @@
         \small#1 \\
         \vspace{1cm} \\
     }
+    % https://tex.stackexchange.com/a/317781/229138
+    \ifx\abstractauthors\empty
+        \RenewDocumentCommand{\abstractauthors}{}{#1}
+    \else
+        \g@addto@macro\abstractauthors{\newline #1}
+    \fi
     \makeatother
 }
 
@@ -191,6 +201,66 @@
 
     \clearpage
 }
+
+% environment for custom abstract
+\RequirePackage{array}
+\RequirePackage{multirow}
+\RequirePackage{booktabs}
+
+\NewDocumentCommand{\begincustomabstract}{}{
+    \NewDocumentCommand{\task}{ m m }{
+        \NewDocumentCommand{\taskDE}{}{##1}
+        \NewDocumentCommand{\taskEN}{}{##2}
+    }
+}
+
+\NewDocumentCommand{\endcustomabstract}{}{
+    \clearpage
+    \clearpairofpagestyles
+    \chead{
+        \begin{tabular}{|p{3cm}|p{4cm} p{7cm}|}
+            \hline
+
+            \multirow{2}{3cm}{\includegraphics{gkr-logo}} &
+            &
+            \vspace{1mm} \fontsize{14pt}{8pt}\selectfont \textbf{HTBLA Grieskirchen} \newline \\
+
+            \cline{2-3}
+
+            & Fachrichtung: & \textbf{\the\discipline}\newline \\
+
+            \hline
+        \end{tabular}
+    }
+    \KOMAoptions{headsepline=0pt, footsepline=0pt}
+
+    \begin{center}
+        \fontsize{18pt}{18pt}\selectfont \textbf{DIPLOMARBEIT} \\
+        \fontsize{14pt}{14pt}\selectfont \textbf{DOKUMENTATION}
+    \end{center}
+
+    \begin{tabular}{|p{5cm}|p{9cm}|}
+        \hline
+        Namen der \newline Verfasser/innen & \abstractauthors    \\
+        \hline
+        Jahrgang \newline Schuljahr        & \the\schoolyear     \\
+        \hline
+        Thema der Diplomarbeit             & \thetitle           \\
+        \hline
+        Kooperationspartner                & \the\partnercompany \\
+        \hline
+    \end{tabular}
+
+    \begin{tabular}{|p{5cm}|p{9cm}|}
+        \hline
+        Aufgabenstellung & \taskDE \\
+        \hline
+    \end{tabular}
+
+    \clearpage
+}
+
+\RenewDocumentEnvironment{abstract}{}{\begincustomabstract}{\endcustomabstract}
 
 % font spacing
 % TODO: fix this
