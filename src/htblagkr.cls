@@ -72,7 +72,7 @@
     \clearpairofpagestyles
     \ohead{\headmark}
 
-    \ifoot{\thetitle}
+    \ifoot{\@title}
     \ofoot{\pagemark}
 }
 \DefaultDiplPageStyle
@@ -81,8 +81,15 @@
 \setkomafont{pagefoot}{\normalfont\fontsize{9pt}{9pt}}
 \setkomafont{pagehead}{\normalfont\fontsize{9pt}{9pt}}
 
-% Retain title and date so that it can be used in custom places
-\RequirePackage{titling}
+% overwrite title to add an optional argument for the title on the title page
+\RequirePackage{ifthen}
+\newcommand{\titlepagetitle}{}
+\RenewDocumentCommand{\title}{O{}m}{
+    \renewcommand{\@title}{#2}
+    \ifthenelse{\equal{#1}{}}
+        {\renewcommand{\titlepagetitle}{#2}}
+        {\renewcommand{\titlepagetitle}{#1}}
+}
 
 % custom metadata
 % https://tex.stackexchange.com/a/239322/229138
@@ -97,7 +104,6 @@
 \newcommand{\affidavitauthors}{}
 \newcommand{\abstractauthors}{}
 
-\RequirePackage{ifthen}
 \RenewDocumentCommand{\author}{mmO{\vspace{3cm}}}{
     \ifthenelse {\equal{\titlepageauthors}{}}
         {\renewcommand{\titlepageauthors}{#1, #2}}
@@ -155,7 +161,7 @@
 
         \parbox[t][3.5cm][t]{13cm}{
             \begin{center}
-                \fontsize{36pt}{26pt}\selectfont \textbf{\thetitle}
+                \fontsize{36pt}{26pt}\selectfont \textbf{\titlepagetitle}
             \end{center}
         }
     \end{center}
@@ -174,7 +180,7 @@
 
     \vspace{4cm}
 
-    \the\location, am \thedate
+    \the\location, am \@date
 
     \clearpage
 
@@ -191,7 +197,7 @@
     \enquote{Ich erkläre an Eides statt, dass ich die vorliegende Diplomarbeit selbstständig und ohne fremde Hilfe verfasst,  andere als die angegebenen Quellen und Hilfsmittel nicht benutzt und alle den benutzten Quellen wörtlich entnommenen Stellen als solche kenntlich gemacht habe.}
 
     \begin{multicols}{2}
-        \the\location, \thedate
+        \the\location, \@date
 
         \columnbreak
 
@@ -246,7 +252,7 @@
         \hline
         Jahrgang \newline Schuljahr        & \the\schoolyear     \\
         \hline
-        Thema der Diplomarbeit             & \thetitle           \\
+        Thema der Diplomarbeit             & \@title           \\
         \hline
         Kooperationspartner                & \the\partnercompany \\
         \hline
