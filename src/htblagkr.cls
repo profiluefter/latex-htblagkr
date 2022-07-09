@@ -25,7 +25,7 @@
 \setlength{\voffset}{1cm}
 
 % custom commands
-\RequirePackage{xpatch}
+\RequirePackage{xparse}
 
 % calibri font
 \RequirePackage{fontspec}
@@ -93,27 +93,28 @@
 \newtoks\partnercompany
 
 % custom author information
-\NewDocumentCommand{\titlepageauthors}{}{}
-\NewDocumentCommand{\affidavitauthors}{}{}
-\NewDocumentCommand{\abstractauthors}{}{}
+\newcommand{\titlepageauthors}{}
+\newcommand{\affidavitauthors}{}
+\newcommand{\abstractauthors}{}
 
 \RequirePackage{ifthen}
 \RenewDocumentCommand{\author}{mmO{\vspace{3cm}}}{
-    \makeatletter
-    \g@addto@macro\titlepageauthors{#1, #2\\}
+    \ifthenelse {\equal{\titlepageauthors}{}}
+        {\renewcommand{\titlepageauthors}{#1, #2}}
+        {\g@addto@macro\titlepageauthors{\\#1, #2}}
+
     \g@addto@macro\affidavitauthors{
-        \normalsize#3\vspace{-1cm} \\
-        \hrule \\
+        \normalsize#3
+        \ifthenelse{\equal{#3}{\vspace{3cm}}}{}{\newline}
+        \vspace{-1cm}
+        \hrule
         \small#1 \\
         \vspace{1cm} \\
     }
-    % https://tex.stackexchange.com/a/317781/229138
-    \ifx\abstractauthors\empty
-        \RenewDocumentCommand{\abstractauthors}{}{#1}
-    \else
-        \g@addto@macro\abstractauthors{\newline #1}
-    \fi
-    \makeatother
+
+    \ifthenelse {\equal{\abstractauthors}{}}
+        {\renewcommand{\abstractauthors}{#1}}
+        {\g@addto@macro\abstractauthors{\newline #1}}
 }
 
 % customize title
@@ -171,7 +172,7 @@
         \the\supervisor
     \end{multicols}
 
-    \vspace{3cm}
+    \vspace{4cm}
 
     \the\location, am \thedate
 
@@ -282,7 +283,6 @@
     afterskip=12bp
 ]{paragraph}
 
-\makeatletter
+\RequirePackage{xpatch}
 \At@startsection{\addtolength{\@tempskipa}{-\parskip}}
 \xpatchcmd{\@xsect}{\vskip\@tempskipa}{\vskip\dimexpr\@tempskipa-\parskip\relax}{}{}
-\makeatother
