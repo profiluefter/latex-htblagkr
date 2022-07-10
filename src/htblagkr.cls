@@ -2,6 +2,7 @@
 %   - https://www.ctan.org/pkg/smartdiagram (powerpoint style smartart)
 %   - https://tex.stackexchange.com/a/533239/229138 (plantuml diagrams)
 %   - https://www.overleaf.com/learn/how-to/Writing_Markdown_in_LaTeX_Documents (markdown in latex)
+%   - https://mirror.ctan.org/macros/latex/contrib/microtype/ (to make documents look good or something)
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{htblagkr}[2022/06/23 Diplomarbeitsvorlage HTBLA Grieskirchen]
@@ -58,7 +59,11 @@
 % https://www.overleaf.com/learn/latex/Articles/How_to_change_paragraph_spacing_in_LaTeX#The_setspace_package
 \RequirePackage[doublespacing]{setspace}
 
-% setup heading
+% =================
+% HEADER AND FOOTER
+% =================
+
+% setup header and footer
 % https://tex.stackexchange.com/a/283744/229138
 \RequirePackage[headsepline, footsepline, singlespacing=true]{scrlayer-scrpage}
 
@@ -81,6 +86,10 @@
 \setkomafont{pagefoot}{\normalfont\fontsize{9pt}{9pt}}
 \setkomafont{pagehead}{\normalfont\fontsize{9pt}{9pt}}
 
+% ====================
+% CUSTOM TITLE COMMAND
+% ====================
+
 % overwrite title to add an optional argument for the title on the title page
 \RequirePackage{ifthen}
 \newcommand{\titlepagetitle}{}
@@ -91,7 +100,10 @@
         {\renewcommand{\titlepagetitle}{#1}}
 }
 
-% custom metadata
+% ===============
+% CUSTOM METADATA
+% ===============
+
 % https://tex.stackexchange.com/a/239322/229138
 \newtoks\location
 \newtoks\discipline
@@ -99,7 +111,10 @@
 \newtoks\supervisor
 \newtoks\partnercompany
 
-% custom author information
+% =====================
+% CUSTOM AUTHOR COMMAND
+% =====================
+
 \newcommand{\titlepageauthors}{}
 \newcommand{\affidavitauthors}{}
 \newcommand{\abstractauthors}{}
@@ -123,7 +138,12 @@
         {\g@addto@macro\abstractauthors{\newline #1}}
 }
 
-% customize title
+% TODO: set pdf metadata, see docs of https://ctan.org/pkg/hyperref section 5.7
+
+% =================
+% CUSTOM TITLE PAGE
+% =================
+
 \RequirePackage{multicol}
 \RequirePackage{graphicx}
 \RenewDocumentCommand{\maketitle}{}{
@@ -187,7 +207,10 @@
     \DefaultDiplPageStyle
 }
 
-% custom affidavit
+% =========
+% AFFIDAVIT
+% =========
+
 \NewDocumentCommand{\affidavit}{}{
     \clearpage
     \thispagestyle{empty}
@@ -209,7 +232,10 @@
     \clearpage
 }
 
-% environment for custom abstract
+% ===========================
+% CUSTOM ABSTRACT ENVIRONMENT
+% ===========================
+
 \RequirePackage{array}
 \RequirePackage{multirow}
 \RequirePackage{booktabs}
@@ -269,8 +295,12 @@
 
 \RenewDocumentEnvironment{abstract}{}{\begincustomabstract}{\endcustomabstract}
 
-% font spacing
+% ===============
+% SECTION SPACING
+% ===============
+
 % TODO: fix this
+% TODO: fix calibri not used in heading
 % https://texwelt.de/fragen/21544/koma-script-abstande-bei-uberschriften-exakt-einstellen-welche-werte-sind-notwendig
 \RedeclareSectionCommand[
     beforeskip=18bp,
