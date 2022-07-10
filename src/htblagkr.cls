@@ -239,56 +239,91 @@
 \RequirePackage{array}
 \RequirePackage{multirow}
 \RequirePackage{booktabs}
+\RequirePackage{tabularx}
+
+\NewDocumentCommand{\createcustomabstractcommand}{m}{
+    \expandafter\NewDocumentCommand\csname #1\endcsname{ m m }{
+        \expandafter\NewDocumentCommand\csname #1DE\endcsname{}{##1}
+        \expandafter\NewDocumentCommand\csname #1EN\endcsname{}{##2}
+    }
+}
 
 \NewDocumentCommand{\begincustomabstract}{}{
-    \NewDocumentCommand{\task}{ m m }{
-        \NewDocumentCommand{\taskDE}{}{##1}
-        \NewDocumentCommand{\taskEN}{}{##2}
-    }
+    \createcustomabstractcommand{task}
+    \createcustomabstractcommand{implementation}
+    \createcustomabstractcommand{results}
+    \createcustomabstractcommand{overviewpicture}
+    \createcustomabstractcommand{awardparticipation}
+    \createcustomabstractcommand{accessibility}
+}
+
+\newcommand{\customabstractheader}{
+    \begin{tabularx}{\textwidth}{|p{4cm}|X p{6.5cm}|}
+        \hline
+
+        \multirow{2}{4cm}{\includegraphics[width=4cm]{gkr-logo}} &               & \vspace{1mm} \fontsize{14pt}{8pt}\selectfont \textbf{HTBLA Grieskirchen} \newline \\
+
+        \cline{2-3}
+
+        & Fachrichtung: & \textbf{\the\discipline}\newline                                                  \\
+
+        \hline
+    \end{tabularx}
+}
+
+\NewDocumentCommand{\customabstractsimpletable}{m m}{
+    \begin{tabularx}{\textwidth}{|p{5cm}|X|}
+        \hline
+        \textbf{#1} & #2 \\
+        \hline
+    \end{tabularx}% this comment is important, otherwise spacing is inconsistent
 }
 
 \NewDocumentCommand{\endcustomabstract}{}{
     \clearpage
-    \clearpairofpagestyles
-    \chead{
-        \begin{tabular}{|p{3cm}|p{4cm} p{7cm}|}
-            \hline
+    \pagestyle{empty}
+    \singlespacing
 
-            \multirow{2}{3cm}{\includegraphics{gkr-logo}} &
-            &
-            \vspace{1mm} \fontsize{14pt}{8pt}\selectfont \textbf{HTBLA Grieskirchen} \newline \\
-
-            \cline{2-3}
-
-            & Fachrichtung: & \textbf{\the\discipline}\newline \\
-
-            \hline
-        \end{tabular}
-    }
-    \KOMAoptions{headsepline=0pt, footsepline=0pt}
+    \customabstractheader
 
     \begin{center}
         \fontsize{18pt}{18pt}\selectfont \textbf{DIPLOMARBEIT} \\
         \fontsize{14pt}{14pt}\selectfont \textbf{DOKUMENTATION}
     \end{center}
 
-    \begin{tabular}{|p{5cm}|p{9cm}|}
+    \begin{tabularx}{\textwidth}{|p{5cm}|X|}
         \hline
-        Namen der \newline Verfasser/innen & \abstractauthors    \\
+        \textbf{Namen der \newline Verfasser/innen} & \abstractauthors    \\
         \hline
-        Jahrgang \newline Schuljahr        & \the\schoolyear     \\
+        \textbf{Jahrgang \newline Schuljahr}        & \the\schoolyear     \\
         \hline
-        Thema der Diplomarbeit             & \@title           \\
+        \textbf{Thema der Diplomarbeit}             & \@title             \\
         \hline
-        Kooperationspartner                & \the\partnercompany \\
+        \textbf{Kooperationspartner}                & \the\partnercompany \\
         \hline
-    \end{tabular}
+    \end{tabularx}
 
-    \begin{tabular}{|p{5cm}|p{9cm}|}
+    \customabstractsimpletable{Aufgabenstellung}{\taskDE}
+
+    \customabstractsimpletable{Realisierung}{\implementationDE}
+
+    \customabstractsimpletable{Ergebnisse}{\resultsDE}
+
+    \clearpage
+
+    \customabstractheader
+
+    \customabstractsimpletable{Typische Grafik, Foto etc.\newline(mit Erläuterung)}{\overviewpictureDE}
+
+    \customabstractsimpletable{Teilnahme an Wettbewerben, Auszeichnungen}{\awardparticipationDE}
+
+    \customabstractsimpletable{Möglichkeiten der Einsichtnahme in die Arbeit}{\accessibilityDE}
+
+    \begin{tabularx}{\textwidth}{|p{5cm}|X|X|}
         \hline
-        Aufgabenstellung & \taskDE \\
+        \textbf{Approbation \newline (Datum/Unterschrift)} & \scriptsize Prüferin/Prüfer & \scriptsize Direktorin/Direktor \\
         \hline
-    \end{tabular}
+    \end{tabularx}
 
     \clearpage
 }
