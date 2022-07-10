@@ -238,7 +238,6 @@
 
 \RequirePackage{array}
 \RequirePackage{multirow}
-\RequirePackage{booktabs}
 \RequirePackage{tabularx}
 
 \NewDocumentCommand{\createcustomabstractcommand}{m}{
@@ -271,55 +270,56 @@
     \end{tabularx}
 }
 
-\NewDocumentCommand{\customabstractsimpletable}{m m}{
+\NewDocumentCommand{\customabstractmiddlecell}{m m}{
+    \parbox[c][#1][c]{\textwidth}{#2}
+}
+\NewDocumentCommand{\customabstractsimpletable}{m m m}{
     \begin{tabularx}{\textwidth}{|p{5cm}|X|}
         \hline
-        \textbf{#1} & #2 \\
+        \textbf{#1} & \customabstractmiddlecell{#3}{#2} \\
         \hline
     \end{tabularx}% this comment is important, otherwise spacing is inconsistent
 }
-
 \NewDocumentCommand{\endcustomabstract}{}{
     \clearpage
-    \pagestyle{empty}
     \singlespacing
 
-    \customabstractheader
+    \clearpairofpagestyles
+    \chead{\customabstractheader}
+    \KOMAoptions{headsepline=0pt, footsepline=0pt}
 
     \begin{center}
         \fontsize{18pt}{18pt}\selectfont \textbf{DIPLOMARBEIT} \\
         \fontsize{14pt}{14pt}\selectfont \textbf{DOKUMENTATION}
     \end{center}
 
-    \begin{tabularx}{\textwidth}{|p{5cm}|X|}
+    \begin{tabularx}{\textwidth}{|m{5cm}|X|}
         \hline
-        \textbf{Namen der \newline Verfasser/innen} & \abstractauthors    \\
+        \textbf{Namen der \newline Verfasser/innen} & \customabstractmiddlecell{15mm}{\abstractauthors}    \\
         \hline
-        \textbf{Jahrgang \newline Schuljahr}        & \the\schoolyear     \\
+        \textbf{Jahrgang \newline Schuljahr}        & \customabstractmiddlecell{10mm}{\the\schoolyear}     \\
         \hline
-        \textbf{Thema der Diplomarbeit}             & \@title             \\
+        \textbf{Thema der Diplomarbeit}             & \customabstractmiddlecell{15mm}{\@title}             \\
         \hline
-        \textbf{Kooperationspartner}                & \the\partnercompany \\
+        \textbf{Kooperationspartner}                & \customabstractmiddlecell{10mm}{\the\partnercompany} \\
         \hline
     \end{tabularx}
 
-    \customabstractsimpletable{Aufgabenstellung}{\taskDE}
+    \customabstractsimpletable{Aufgabenstellung}{\taskDE}{4.5cm}
 
-    \customabstractsimpletable{Realisierung}{\implementationDE}
+    \customabstractsimpletable{Realisierung}{\implementationDE}{4.5cm}
 
-    \customabstractsimpletable{Ergebnisse}{\resultsDE}
+    \customabstractsimpletable{Ergebnisse}{\resultsDE}{5.5cm}
 
     \clearpage
 
-    \customabstractheader
+    \customabstractsimpletable{Typische Grafik, Foto etc.\newline(mit Erläuterung)}{\overviewpictureDE}{16.5cm}
 
-    \customabstractsimpletable{Typische Grafik, Foto etc.\newline(mit Erläuterung)}{\overviewpictureDE}
+    \customabstractsimpletable{Teilnahme an Wettbewerben, Auszeichnungen}{\awardparticipationDE}{2cm}
 
-    \customabstractsimpletable{Teilnahme an Wettbewerben, Auszeichnungen}{\awardparticipationDE}
+    \customabstractsimpletable{Möglichkeiten der Einsichtnahme in die Arbeit}{\accessibilityDE}{2cm}
 
-    \customabstractsimpletable{Möglichkeiten der Einsichtnahme in die Arbeit}{\accessibilityDE}
-
-    \begin{tabularx}{\textwidth}{|p{5cm}|X|X|}
+    \begin{tabularx}{\textwidth}{|m{5cm}|X|X|}
         \hline
         \textbf{Approbation \newline (Datum/Unterschrift)} & \scriptsize Prüferin/Prüfer & \scriptsize Direktorin/Direktor \\
         \hline
