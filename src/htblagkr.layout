@@ -1,0 +1,133 @@
+#% Do not delete the line below; configure depends on this
+#  \DeclareLaTeXClass{Diplomarbeitsvorlage HTBLA Grieskirchen}
+#  \DeclareCategory{Articles}
+# Diplomarbeitsvorlage HTBLA Grieskirchen textclass definition file.
+# Fabian Gurtner <fabian.paul.gurtner@gmail.com>, 2022/07/10.
+
+Format 66
+
+# Read the definitions from scrartcl.layout
+Input scrartcl.layout
+
+# Remove unused styles
+NoStyle Part
+NoStyle Part*
+NoStyle Subtitle
+NoStyle Subject
+NoStyle Publishers
+NoStyle Dedication
+NoStyle Titlehead
+NoStyle Uppertitleback
+NoStyle Lowertitleback
+NoStyle Extratitle
+NoStyle Address
+NoStyle Right_Address
+
+DefaultFont
+    Family Sans
+EndFont
+
+Style Title
+    Argument 1
+        LabelString "Form. Titel"
+        MenuString "Formatierter Titel"
+        Tooltip "Titel auf der Titelseite"
+        Mandatory 0
+        InsertCotext 1
+    EndArgument
+End
+
+Style Author
+    Argument post:1
+        LabelString Klasse
+        Tooltip "Klasse des Authors (z.B. 5AHIF)"
+        Mandatory 1
+        AutoInsert 1
+    EndArgument
+    Argument post:2
+        LabelString Unterschrift
+        Tooltip "Unterschrift für die eidesstattliche Erklärung"
+        Mandatory 0
+    EndArgument
+
+    Align Left
+    Margin Dynamic
+    LabelType Static
+    LabelString "Author:"
+    Font
+        Size normal
+    EndFont
+
+    BottomSep 0.5
+End
+
+Style Ort
+    Category FrontMatter
+    LatexType Command
+    LatexName location
+    InTitle 1
+
+    Margin Dynamic
+    LabelType Static
+    LabelString "Ort:"
+    LabelSep xxx
+
+    BottomSep 0.5
+End
+
+Style Date
+    LabelType Static
+    LabelString "Datum:"
+    Align Left
+    Font
+        Size normal
+    EndFont
+End
+
+Style Fachrichtung
+    Category FrontMatter
+    LatexType Command
+    LatexName discipline
+    InTitle 1
+
+    Margin Dynamic
+    LabelType Static
+    LabelString "Fachrichtung:"
+    LabelSep xxx
+
+    BottomSep 0.5
+End
+
+Style Schuljahr
+    CopyStyle Fachrichtung
+    LatexName schoolyear
+    LabelString "Schuljahr:"
+End
+
+Style "Betreuer*in"
+    CopyStyle Fachrichtung
+    LatexName supervisor
+    LabelString "Betreuer*in:"
+End
+
+Style Kooperationspartner
+    CopyStyle Fachrichtung
+    LatexName partnercompany
+    LabelString "Kooperationspartner:"
+End
+
+InsetLayout Flex:Affidavit
+    LyxType custom
+    LabelString "Eidesstattliche Erklärung"
+    LatexName affidavit
+    LatexType Command
+    BgColor listingsbg
+    MultiPar false
+    Spellcheck false
+    Decoration classic
+    KeepEmpty true
+    ResetsFont true
+End
+
+# Redefine abstract
+NoStyle Abstract
