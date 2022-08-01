@@ -330,6 +330,38 @@
 
 \RenewDocumentEnvironment{abstract}{}{\begincustomabstract}{\endcustomabstract}
 
+% =================
+% TABLE OF CONTENTS
+% =================
+
+% TODO: align toc heading to the right
+
+% toc on own page
+\g@addto@macro\tableofcontents{\clearpage}
+
+% make toc clickable
+\RequirePackage[hidelinks]{hyperref}
+
+% options from scrguide.pdf page 75
+\KOMAoptions{toc=listof, sectionentrydots=true}
+
+% less spacing in dots
+%\setkomafont{chapterentrydots}{\usekomafont{disposition}}
+
+% =======
+% FIGURES
+% =======
+% see scrguide.pdf chapter 3.20 page 135
+
+% use abbreviated prefixes
+\KOMAoptions{listof=entryprefix}
+\renewcaptionname{ngerman}{\figurename}{Abb.}
+
+% ========
+% GLOSSARY
+% ========
+% see https://www.overleaf.com/learn/latex/Glossaries
+
 % ===============
 % SECTION SPACING
 % ===============

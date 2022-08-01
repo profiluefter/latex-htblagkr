@@ -1,5 +1,7 @@
 \documentclass{htblagkr}
 
+\usepackage{wrapfig}
+
 \title[Titel der \\ Diplomarbeit]{Titel der Diplomarbeit}
 \author{Max Mustermann}{5BHIF-12}
 \author{Mein Name}{5BHIF-34}[\includegraphics{example-signature}]
@@ -12,6 +14,8 @@
 \partnercompany{Google Inc.}
 
 \begin{document}
+    \pagenumbering{Roman} % TODO: actually should be none
+
     \maketitle
 
     \affidavit
@@ -25,12 +29,22 @@
         \accessibility{Uneingeschränkt}{Unrestricted}
     \end{abstract}
 
+    \tableofcontents
+
+    \pagenumbering{arabic} % TODO: ideally find a way to automate this
+
     \section{Individualarbeitsrecht}
     Da die Interessen der Arbeitgeber und Arbeitnehmer von Natur aus sehr unterschiedlich sind, ist es wichtig, klare Vereinbarungen zu treffen, die auch bei späteren Meinungsverschiedenheiten nachgewiesen werden können.
 
     \subsection{Das Arbeitsverhältnis}
     Wenn ein Arbeitnehmer seine Arbeitskraft einem Arbeitgeber zur Verfügung stellt und dabei unter dessen Leitung in persönlicher und wirtschaftlicher Abhängigkeit tätig ist, so ist ein Arbeitsverhältnis entstanden.
 
+    \begin{wrapfigure}{l}{3cm}
+        \centering
+        \includegraphics[width=3cm]{gkr-logo}
+        \caption{Logo der HTBLA Grieskirchen}
+    \end{wrapfigure}
+    
     Grundsätzlich gilt auch im Arbeitsrecht der Stufenbau der Rechtsordnung.
     Die höherrangige Norm geht in der Regel der niedrigeren vor.
     Ist jedoch die niedrigere Norm für den Arbeitnehmer günstiger, so gilt diese.
@@ -62,5 +76,9 @@
     \textbf{gesetzliche Grundlagen:} Gewerbeordnung 1858, ABGB oder Sondergesetze
 
     \textbf{Beispiele:} Kfz-Mechaniker, Bäcker
+
+    \clearpage
+
+    \listoffigures
 
 \end{document}
