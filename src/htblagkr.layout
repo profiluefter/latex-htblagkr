@@ -116,7 +116,40 @@ Style Kooperationspartner
     LabelString "Kooperationspartner:"
 End
 
-InsetLayout Flex:Affidavit
+Style "Abkürzungsdefinition"
+    Category FrontMatter
+    LatexType Command
+    LatexName newabbreviationshort
+    InPreamble 1
+
+    Argument 1
+        LabelString Key
+        Tooltip "Optionaler Schlüssel falls dieselbe Abkürzung doppelt definiert werden soll"
+        Mandatory 0
+    EndArgument
+    Argument 2
+        LabelString Abkürzung
+        Tooltip "Abkürzung in der korrekten Schreibweise"
+        Mandatory 1
+        AutoInsert 1
+    EndArgument
+End
+
+Style "Begriffsdefinition"
+    CopyStyle "Abkürzungsdefinition"
+    LatexName newglossaryentryshort
+    Argument 1
+        Tooltip "Optionaler Schlüssel falls derselbe Begriff doppelt definiert werden soll"
+    EndArgument
+    Argument 2
+        LabelString Begriff
+        Tooltip "Name des Begriffs"
+        Mandatory 1
+        AutoInsert 1
+    EndArgument
+End
+
+InsetLayout "Flex:Eidesstattliche Erklärung"
     LyxType custom
     LabelString "Eidesstattliche Erklärung"
     LatexName affidavit
@@ -127,6 +160,35 @@ InsetLayout Flex:Affidavit
     Decoration classic
     KeepEmpty true
     ResetsFont true
+End
+
+InsetLayout Flex:Affidavit
+    CopyStyle "Flex:Eidesstattliche Erklärung"
+    ObsoletedBy "Flex:Eidesstattliche Erklärung"
+End
+
+InsetLayout "Flex:Abkürzungsverzeichnis"
+    CopyStyle "Flex:Eidesstattliche Erklärung"
+    LabelString "Abkürzungsverzeichnis"
+    LatexName printabbreviations
+End
+
+InsetLayout "Flex:Abkürzung"
+    CopyStyle "Flex:Eidesstattliche Erklärung"
+    LabelString "Abkürzung"
+    LatexName gls
+End
+
+InsetLayout "Flex:Glossar"
+    CopyStyle "Flex:Eidesstattliche Erklärung"
+    LabelString "Glossar"
+    LatexName printglossary
+End
+
+InsetLayout "Flex:Begriff"
+    CopyStyle "Flex:Eidesstattliche Erklärung"
+    LabelString "Begriff"
+    LatexName gls
 End
 
 # Redefine abstract

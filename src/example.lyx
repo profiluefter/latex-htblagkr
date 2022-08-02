@@ -152,7 +152,7 @@ Google Inc.
 \end_layout
 
 \begin_layout Standard
-\begin_inset Flex Affidavit
+\begin_inset Flex Eidesstattliche Erklärung
 status collapsed
 
 \begin_layout Plain Layout
@@ -162,6 +162,32 @@ status collapsed
 \end_inset
 
 
+\end_layout
+
+\begin_layout Abkürzungsdefinition
+\begin_inset Argument 2
+status open
+
+\begin_layout Plain Layout
+HTBLA
+\end_layout
+
+\end_inset
+
+Höhere technische Bundeslehranstalt
+\end_layout
+
+\begin_layout Begriffsdefinition
+\begin_inset Argument 2
+status open
+
+\begin_layout Plain Layout
+Schule
+\end_layout
+
+\end_inset
+
+Bildungseinrichtung
 \end_layout
 
 \begin_layout Standard
@@ -187,7 +213,7 @@ lines 0
 placement o
 overhang 0in
 width "25col%"
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
@@ -237,6 +263,45 @@ Inhalt
 und wieder Text
 \end_layout
 
+\begin_layout Section
+Abkürzungen
+\end_layout
+
+\begin_layout Standard
+Hier wird die Abkürzung 
+\begin_inset Flex Abkürzung
+status open
+
+\begin_layout Plain Layout
+HTBLA
+\end_layout
+
+\end_inset
+
+ verwendet.
+ Eine 
+\begin_inset Flex Abkürzung
+status open
+
+\begin_layout Plain Layout
+HTBLA
+\end_layout
+
+\end_inset
+
+ ist eine 
+\begin_inset Flex Begriff
+status open
+
+\begin_layout Plain Layout
+Schule
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
 \begin_layout Standard
 \begin_inset Newpage clearpage
 \end_inset
@@ -246,6 +311,40 @@ und wieder Text
 
 \begin_layout Standard
 \begin_inset FloatList figure
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\begin_inset Flex Abkürzungsverzeichnis
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\begin_inset Flex Glossar
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
 
 \end_inset
 

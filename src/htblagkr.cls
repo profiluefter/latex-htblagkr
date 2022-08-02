@@ -360,8 +360,9 @@
 % ========
 % GLOSSARY
 % ========
-\RequirePackage[acronym, nogroupskip, nonumberlist, automake=immediate]{glossaries}
-\GlsSetQuote{+} % fix collision with ngerman language
+\RequirePackage[abbreviations, nogroupskip, nonumberlist, automake=immediate]{glossaries-extra}
+\setabbreviationstyle{short-long}
+\renewcommand{\abbreviationsname}{Abkürzungen}
 
 \makeglossaries
 
@@ -387,11 +388,12 @@
     local filename = "\jobname"
 
     function makeglossaries()
-        texio.write_nl("Content of " .. filename .. ".acn:")
-        local acn = assert(io.open(filename .. ".acn","r"))
-        local acn_content = assert(acn:read("*a"))
-        acn:close()
-        texio.write_nl(acn_content)
+% Used for debugging
+%        texio.write_nl("Content of " .. filename .. ".acn:")
+%        local acn = assert(io.open(filename .. ".acn","r"))
+%        local acn_content = assert(acn:read("*a"))
+%        acn:close()
+%        texio.write_nl(acn_content)
 
         runcommand("makeglossaries-lite " .. filename)
     end
@@ -400,6 +402,20 @@
     if error then
         texio.write_nl("Error adding callback: " .. error)
     end
+}
+
+% make second argument of \newabbreviation optional
+\NewDocumentCommand{\newabbreviationshort}{O{}mm}{
+    \ifthenelse{\equal{#1}{}}
+    {\newabbreviation{#2}{#2}{#3}}
+    {\newabbreviation{#1}{#2}{#3}}
+}
+
+% make \newglossaryentry more LyX-friendly
+\NewDocumentCommand{\newglossaryentryshort}{O{}mm}{
+    \ifthenelse{\equal{#1}{}}
+    {\newglossaryentry{#2}{name={#2},description={#3}}}
+    {\newglossaryentry{#1}{name={#2},description={#3}}}
 }
 
 % ===============
