@@ -360,7 +360,47 @@
 % ========
 % GLOSSARY
 % ========
-% see https://www.overleaf.com/learn/latex/Glossaries
+\RequirePackage[acronym, nogroupskip, nonumberlist, automake=immediate]{glossaries}
+\GlsSetQuote{+} % fix collision with ngerman language
+
+\makeglossaries
+
+% run makeglossaries-lite after the glossary is created
+% process running code stolen from https://www.overleaf.com/learn/latex/Articles/Using_LuaTeX_to_run_tools_and_utilities_installed_on_Overleaf%E2%80%99s_servers
+\RequirePackage{luacode}
+\directlua{
+    function runcommand(cmd)
+        texio.write_nl("Running command: " .. cmd)
+        local return_code = os.execute(cmd)
+
+        if return_code == nil then
+            texio.write_nl("!!! COMMAND EXECUTION NOT ENABLED IN LUATEX !!!")
+            texio.write_nl("!!! COMMAND EXECUTION NOT ENABLED IN LUATEX !!!")
+            texio.write_nl("Please pass the --shell-escape parameter to luatex!")
+            texio.write_nl("!!! COMMAND EXECUTION NOT ENABLED IN LUATEX !!!")
+            texio.write_nl("!!! COMMAND EXECUTION NOT ENABLED IN LUATEX !!!")
+        end
+
+        texio.write_nl("Command finished with return code " .. return_code)
+    end
+
+    local filename = "\jobname"
+
+    function makeglossaries()
+        texio.write_nl("Content of " .. filename .. ".acn:")
+        local acn = assert(io.open(filename .. ".acn","r"))
+        local acn_content = assert(acn:read("*a"))
+        acn:close()
+        texio.write_nl(acn_content)
+
+        runcommand("makeglossaries-lite " .. filename)
+    end
+
+    id,error=luatexbase.add_to_callback("finish_pdffile", makeglossaries, "makeglossaries")
+    if error then
+        texio.write_nl("Error adding callback: " .. error)
+    end
+}
 
 % ===============
 % SECTION SPACING

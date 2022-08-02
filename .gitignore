@@ -1,6 +1,11 @@
-.idea
-auxil
-out
-*.aux
-*.log
-*.pdf
+.idea/
+auxil/
+out/
+src/
+!src/example.lyx
+!src/example.tex
+!src/example-signature.png
+!src/gkr-logo.png
+!src/htblagkr.cls
+!src/htblagkr.layout
+!src/htl-logo.jpg
