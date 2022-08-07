@@ -356,6 +356,7 @@
 % use abbreviated prefixes
 \KOMAoptions{listof=entryprefix}
 \renewcaptionname{ngerman}{\figurename}{Abb.}
+\renewcaptionname{naustrian}{\figurename}{Abb.}
 
 % ========
 % GLOSSARY
