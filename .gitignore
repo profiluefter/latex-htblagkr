@@ -1,7 +1,7 @@
 .idea/
 auxil/
 out/
-src/
+src/**
 !src/example.lyx
 !src/example.tex
 !src/example-signature.png
@@ -9,3 +9,4 @@ src/
 !src/htblagkr.cls
 !src/htblagkr.layout
 !src/htl-logo.jpg
+!src/example.bib

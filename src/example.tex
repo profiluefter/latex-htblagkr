@@ -2,6 +2,9 @@
 
 \usepackage{wrapfig}
 
+\usepackage[backend=biber]{biblatex}
+\addbibresource{example.bib}
+
 \title[Titel der \\ Diplomarbeit]{Titel der Diplomarbeit}
 \author{Max Mustermann}{5BHIF-12}
 \author{Mein Name}{5BHIF-34}[\includegraphics{example-signature}]
@@ -42,6 +45,8 @@
     \subsection{Das Arbeitsverhältnis}
     Wenn ein Arbeitnehmer seine Arbeitskraft einem Arbeitgeber zur Verfügung stellt und dabei unter dessen Leitung in persönlicher und wirtschaftlicher Abhängigkeit tätig ist, so ist ein Arbeitsverhältnis entstanden.
     Neben diesem Satz finden Sie das Logo der \gls{HTBLA} Grieskirchen.
+    Beispiel-Zitat Eins.\cite{roman_bittersuse_1986}
+    Beispiel-Zitat Zwei.\cite{pc_hardwarebuch}
     Eine \gls{HTBLA} ist eine \gls{Schule}.
 
     \begin{wrapfigure}{l}{3cm}
@@ -93,5 +98,9 @@
     \clearpage
 
     \printglossary
+
+    \clearpage
+
+    \printbibliography
 
 \end{document}
