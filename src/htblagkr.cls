@@ -456,20 +456,24 @@
 
 % begin new page for each section
 % https://tex.stackexchange.com/a/606812/229138
-\AddToHook{cmd/section/before}{
-    \clearpage
+\AddToHook{cmd/section/before}{\clearpage}
 
+\RequirePackage{xpatch}
+
+% not sure what this does anymore
+\At@startsection{\addtolength{\@tempskipa}{-\parskip}}
+\xpatchcmd{\@xsect}{\vskip\@tempskipa}{\vskip\dimexpr\@tempskipa-\parskip\relax}{}{}
+
+% switch page numbering on use of first numbered heading
+% command to patch taken from https://tex.stackexchange.com/a/235968/229138
+\xapptocmd{\@sect}{
     % enable page numbering if invoked the first time
     \ifthenelse{\equal{\@ispagenumberactive}{false}}
     {
         \renewcommand{\@ispagenumberactive}{true}
         \pagenumbering{arabic}
-        % FIXME: in example.tex there are two pages with the number one!
-        % the number is however not displayed on that page yet, so it doesn't matter that much (only wrong in PDF reader)
     }
-    {}
+    {} % endif
 }
-
-\RequirePackage{xpatch}
-\At@startsection{\addtolength{\@tempskipa}{-\parskip}}
-\xpatchcmd{\@xsect}{\vskip\@tempskipa}{\vskip\dimexpr\@tempskipa-\parskip\relax}{}{}
+{} % ignore patch success
+{} % ignore patch failure
