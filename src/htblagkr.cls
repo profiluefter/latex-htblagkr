@@ -73,14 +73,21 @@
 % https://tex.stackexchange.com/a/225277/229138
 \automark{section}
 
+% set page numbering for pages before the content to roman numerals
+\pagenumbering{Roman}
+
+% necessary to make the title in the footer optional
 \newcommand{\@istitleset}{false}
+
+% to only show the page number on the first page actually containing content
+\newcommand{\@ispagenumberactive}{false}
 
 \NewDocumentCommand{\DefaultDiplPageStyle}{}{
     \clearpairofpagestyles
     \ohead{\headmark}
 
     \ifoot{\ifthenelse{\equal{\@istitleset}{true}}{\@title}{}}
-    \ofoot{\pagemark}
+    \ofoot{\ifthenelse{\equal{\@ispagenumberactive}{true}}{\pagemark}{}}
 }
 \DefaultDiplPageStyle
 
@@ -449,7 +456,19 @@
 
 % begin new page for each section
 % https://tex.stackexchange.com/a/606812/229138
-\AddToHook{cmd/section/before}{\clearpage}
+\AddToHook{cmd/section/before}{
+    \clearpage
+
+    % enable page numbering if invoked the first time
+    \ifthenelse{\equal{\@ispagenumberactive}{false}}
+    {
+        \renewcommand{\@ispagenumberactive}{true}
+        \pagenumbering{arabic}
+        % FIXME: in example.tex there are two pages with the number one!
+        % the number is however not displayed on that page yet, so it doesn't matter that much (only wrong in PDF reader)
+    }
+    {}
+}
 
 \RequirePackage{xpatch}
 \At@startsection{\addtolength{\@tempskipa}{-\parskip}}
