@@ -447,6 +447,10 @@
     afterskip=12bp
 ]{paragraph}
 
+% begin new page for each section
+% https://tex.stackexchange.com/a/606812/229138
+\AddToHook{cmd/section/before}{\clearpage}
+
 \RequirePackage{xpatch}
 \At@startsection{\addtolength{\@tempskipa}{-\parskip}}
 \xpatchcmd{\@xsect}{\vskip\@tempskipa}{\vskip\dimexpr\@tempskipa-\parskip\relax}{}{}
