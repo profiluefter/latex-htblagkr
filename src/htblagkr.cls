@@ -182,7 +182,7 @@
 
         \fontsize{16pt}{16pt}\selectfont Gesamtprojekt
 
-        \parbox[t][3.5cm][t]{13cm}{
+        \parbox[t][6.5cm][t]{13cm}{
             \begin{center}
                 \fontsize{36pt}{26pt}\selectfont \textbf{\titlepagetitle}
             \end{center}
@@ -201,7 +201,7 @@
         \the\supervisor
     \end{multicols}
 
-    \vspace{4cm}
+    \vspace{1.5cm}
 
     \the\location, am \@date
 
