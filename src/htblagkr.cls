@@ -356,7 +356,8 @@
 % use abbreviated prefixes
 \KOMAoptions{listof=entryprefix}
 \renewcaptionname{ngerman}{\figurename}{Abb.}
-\renewcaptionname{naustrian}{\figurename}{Abb.}
+% only exists if loaded outside (e.g. when using LyX) so ignore if language is not loaded
+\defcaptionname{naustrian}{\figurename}{Abb.}
 
 % ========
 % GLOSSARY
