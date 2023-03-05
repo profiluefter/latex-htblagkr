@@ -10,3 +10,5 @@ src/**
 !src/htblagkr.layout
 !src/htl-logo.jpg
 !src/example.bib
+
+!src/minimal.tex

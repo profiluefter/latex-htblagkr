@@ -73,11 +73,13 @@
 % https://tex.stackexchange.com/a/225277/229138
 \automark{section}
 
+\newcommand{\@istitleset}{false}
+
 \NewDocumentCommand{\DefaultDiplPageStyle}{}{
     \clearpairofpagestyles
     \ohead{\headmark}
 
-    \ifoot{\@title}
+    \ifoot{\ifthenelse{\equal{\@istitleset}{true}}{\@title}{}}
     \ofoot{\pagemark}
 }
 \DefaultDiplPageStyle
@@ -95,6 +97,7 @@
 \newcommand{\titlepagetitle}{}
 \RenewDocumentCommand{\title}{O{}m}{
     \renewcommand{\@title}{#2}
+    \renewcommand{\@istitleset}{true}
     \ifthenelse{\equal{#1}{}}
         {\renewcommand{\titlepagetitle}{#2}}
         {\renewcommand{\titlepagetitle}{#1}}
