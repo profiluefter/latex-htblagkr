@@ -493,7 +493,8 @@
 \setminted{
     autogobble,
     breaklines,
-    linenos
+    linenos,
+    tabsize=4
 }
 
 \NewDocumentCommand{\remapmintedlanguage}{mm}{
