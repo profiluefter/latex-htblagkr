@@ -460,7 +460,7 @@
 % https://tex.stackexchange.com/a/606812/229138
 \AddToHook{cmd/section/before}{\clearpage}
 
-\RequirePackage{xpatch}
+\RequirePackage{regexpatch}
 
 % not sure what this does anymore
 \At@startsection{\addtolength{\@tempskipa}{-\parskip}}
@@ -469,7 +469,7 @@
 % switch page numbering on use of first numbered heading
 % command to patch taken from https://tex.stackexchange.com/a/235968/229138
 \xapptocmd{\@sect}{
-    % enable page numbering if invoked the first time
+% enable page numbering if invoked the first time
     \ifthenelse{\equal{\@ispagenumberactive}{false}}
     {
         \renewcommand{\@ispagenumberactive}{true}
@@ -478,4 +478,30 @@
     {} % endif
 }
 {} % ignore patch success
-{} % ignore patch failure
+{
+    \ClassWarning{htblagkr}{Patching of section command failed}
+}
+
+% ==========
+% CODEBLOCKS
+% ==========
+
+% Use minted for syntax highlighting
+\RequirePackage{minted}
+\setminted{
+    autogobble,
+    breaklines,
+    linenos
+}
+
+\NewDocumentCommand{\remapmintedlanguage}{mm}{
+    \makeatletter
+    \xpatchcmd{\minted@configlang}{\def \minted@lang {##1}}{\ifthenelse{\equal{##1}{#1}}{\def \minted@lang {#2}}{\def \minted@lang {##1}}}
+    {
+        \xshowcmd{\minted@configlang} % for debugging
+    }
+    {
+        \ClassError{htblagkr}{Patching of minted@configlang failed. Cannot remap language}{This is an internal error.}
+    }
+    \makeatother
+}
