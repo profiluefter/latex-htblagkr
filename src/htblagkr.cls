@@ -31,6 +31,8 @@
 % calibri font
 \RequirePackage{fontspec}
 \setmainfont{Calibri}
+% consolas for codeblocks, monospaced Calibri is an experience...
+\setmonofont{Consolas}
 
 % german
 \RequirePackage[ngerman]{babel}
