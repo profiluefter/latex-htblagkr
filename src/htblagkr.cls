@@ -4,6 +4,8 @@
 %   - https://www.overleaf.com/learn/how-to/Writing_Markdown_in_LaTeX_Documents (markdown in latex)
 %   - https://mirror.ctan.org/macros/latex/contrib/microtype/ (to make documents look good or something)
 
+% TODO: prefix all internal commands and add an at character so that they won't conflict and can't be used unknowingly
+
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{htblagkr}[2022/06/23 Diplomarbeitsvorlage HTBLA Grieskirchen]
 
@@ -252,6 +254,42 @@
 % CUSTOM ABSTRACT ENVIRONMENT
 % ===========================
 
+% TODO: rename all variables to this format
+\NewDocumentCommand{\htblagkr@abstract@headingDE@discipline}{}{Fachrichtung}
+\NewDocumentCommand{\htblagkr@abstract@headingEN@discipline}{}{Department}
+\NewDocumentCommand{\htblagkr@abstract@headingDE@thesis}{}{DIPLOMARBEIT}
+\NewDocumentCommand{\htblagkr@abstract@headingEN@thesis}{}{DIPLOMA THESIS}
+\NewDocumentCommand{\htblagkr@abstract@headingDE@documentation}{}{DOKUMENTATION}
+\NewDocumentCommand{\htblagkr@abstract@headingEN@documentation}{}{Documentation}
+\NewDocumentCommand{\htblagkr@abstract@headingDE@author}{}{Namen der \newline Verfasser/innen}
+\NewDocumentCommand{\htblagkr@abstract@headingEN@author}{}{Author(s)}
+\NewDocumentCommand{\htblagkr@abstract@headingDE@schoolyear}{}{Jahrgang \newline Schuljahr}
+\NewDocumentCommand{\htblagkr@abstract@headingEN@schoolyear}{}{Form \newline Academic year}
+\NewDocumentCommand{\htblagkr@abstract@headingDE@topic}{}{Thema der Diplomarbeit}
+\NewDocumentCommand{\htblagkr@abstract@headingEN@topic}{}{Topic}
+\NewDocumentCommand{\htblagkr@abstract@headingDE@partnercompany}{}{Kooperationspartner}
+\NewDocumentCommand{\htblagkr@abstract@headingEN@partnercompany}{}{Co-operation partners}
+\NewDocumentCommand{\htblagkr@abstract@headingDE@task}{}{Aufgabenstellung}
+\NewDocumentCommand{\htblagkr@abstract@headingEN@task}{}{Assignment of tasks}
+\NewDocumentCommand{\htblagkr@abstract@headingDE@implementation}{}{Realisierung}
+\NewDocumentCommand{\htblagkr@abstract@headingEN@implementation}{}{Realisation}
+\NewDocumentCommand{\htblagkr@abstract@headingDE@results}{}{Ergebnisse}
+\NewDocumentCommand{\htblagkr@abstract@headingEN@results}{}{Results}
+\NewDocumentCommand{\htblagkr@abstract@headingDE@overviewpicture}{}{Typische Grafik, Foto etc.\newline(mit Erläuterung)}
+\NewDocumentCommand{\htblagkr@abstract@headingEN@overviewpicture}{}{Illustrative graph, photo\newline(incl. explanation)}
+\NewDocumentCommand{\htblagkr@abstract@headingDE@awardparticipation}{}{Teilnahme an Wettbewerben, Auszeichnungen}
+\NewDocumentCommand{\htblagkr@abstract@headingEN@awardparticipation}{}{Participation in competitions\newline Awards}
+\NewDocumentCommand{\htblagkr@abstract@headingDE@accessibility}{}{Möglichkeiten der Einsichtnahme in die Arbeit}
+\NewDocumentCommand{\htblagkr@abstract@headingEN@accessibility}{}{Accessibility of\newline diploma thesis}
+\NewDocumentCommand{\htblagkr@abstract@headingDE@approval}{}{Approbation}
+\NewDocumentCommand{\htblagkr@abstract@headingEN@approval}{}{Approval}
+\NewDocumentCommand{\htblagkr@abstract@headingDE@datesignature}{}{Datum/Unterschrift}
+\NewDocumentCommand{\htblagkr@abstract@headingEN@datesignature}{}{date/signature}
+\NewDocumentCommand{\htblagkr@abstract@headingDE@examiner}{}{Prüfer/Prüferin}
+\NewDocumentCommand{\htblagkr@abstract@headingEN@examiner}{}{Examiner}
+\NewDocumentCommand{\htblagkr@abstract@headingDE@headofdepartment}{}{Direktor/Direktorin}
+\NewDocumentCommand{\htblagkr@abstract@headingEN@headofdepartment}{}{Head of College/Department}
+
 \RequirePackage{array}
 \RequirePackage{multirow}
 \RequirePackage{tabularx}
@@ -272,7 +310,7 @@
     \createcustomabstractcommand{accessibility}
 }
 
-\newcommand{\customabstractheader}{
+\NewDocumentCommand{\customabstractheader}{m}{
     \begin{tabularx}{\textwidth}{|p{4cm}|X p{6.5cm}|}
         \hline
 
@@ -280,7 +318,7 @@
 
         \cline{2-3}
 
-        & Fachrichtung: & \textbf{\the\discipline}\newline                                                  \\
+        & \csname htblagkr@abstract@heading#1@discipline\endcsname: & \textbf{\the\discipline}\newline                                                  \\
 
         \hline
     \end{tabularx}
@@ -296,52 +334,58 @@
         \hline
     \end{tabularx}% this comment is important, otherwise spacing is inconsistent
 }
-\NewDocumentCommand{\endcustomabstract}{}{
+
+\NewDocumentCommand{\customabstractpage}{m}{
     \clearpage
     \singlespacing
 
     \clearpairofpagestyles
-    \chead{\customabstractheader}
+    \chead{\customabstractheader{#1}}
     \KOMAoptions{headsepline=0pt, footsepline=0pt}
 
     \begin{center}
-        \fontsize{18pt}{18pt}\selectfont \textbf{DIPLOMARBEIT} \\
-        \fontsize{14pt}{14pt}\selectfont \textbf{DOKUMENTATION}
+        \fontsize{18pt}{18pt}\selectfont \textbf{\csname htblagkr@abstract@heading#1@thesis\endcsname} \\
+        \fontsize{14pt}{14pt}\selectfont \textbf{\csname htblagkr@abstract@heading#1@documentation\endcsname}
     \end{center}
 
     \begin{tabularx}{\textwidth}{|m{5cm}|X|}
         \hline
-        \textbf{Namen der \newline Verfasser/innen} & \customabstractmiddlecell{15mm}{\abstractauthors}    \\
+        \textbf{\csname htblagkr@abstract@heading#1@author\endcsname} & \customabstractmiddlecell{15mm}{\abstractauthors}    \\
         \hline
-        \textbf{Jahrgang \newline Schuljahr}        & \customabstractmiddlecell{10mm}{\the\schoolyear}     \\
+        \textbf{\csname htblagkr@abstract@heading#1@schoolyear\endcsname}        & \customabstractmiddlecell{10mm}{\the\schoolyear}     \\
         \hline
-        \textbf{Thema der Diplomarbeit}             & \customabstractmiddlecell{15mm}{\@title}             \\
+        \textbf{\csname htblagkr@abstract@heading#1@topic\endcsname}             & \customabstractmiddlecell{15mm}{\@title}             \\
         \hline
-        \textbf{Kooperationspartner}                & \customabstractmiddlecell{10mm}{\the\partnercompany} \\
-        \hline
-    \end{tabularx}
-
-    \customabstractsimpletable{Aufgabenstellung}{\taskDE}{4.5cm}
-
-    \customabstractsimpletable{Realisierung}{\implementationDE}{4.5cm}
-
-    \customabstractsimpletable{Ergebnisse}{\resultsDE}{5.5cm}
-
-    \clearpage
-
-    \customabstractsimpletable{Typische Grafik, Foto etc.\newline(mit Erläuterung)}{\overviewpictureDE}{16.5cm}
-
-    \customabstractsimpletable{Teilnahme an Wettbewerben, Auszeichnungen}{\awardparticipationDE}{2cm}
-
-    \customabstractsimpletable{Möglichkeiten der Einsichtnahme in die Arbeit}{\accessibilityDE}{2cm}
-
-    \begin{tabularx}{\textwidth}{|m{5cm}|X|X|}
-        \hline
-        \textbf{Approbation \newline (Datum/Unterschrift)} & \scriptsize Prüferin/Prüfer & \scriptsize Direktorin/Direktor \\
+        \textbf{\csname htblagkr@abstract@heading#1@partnercompany\endcsname}                & \customabstractmiddlecell{10mm}{\the\partnercompany} \\
         \hline
     \end{tabularx}
 
+    \customabstractsimpletable{\csname htblagkr@abstract@heading#1@task\endcsname}{\csname task#1\endcsname}{4.5cm}
+
+    \customabstractsimpletable{\csname htblagkr@abstract@heading#1@implementation\endcsname}{\csname implementation#1\endcsname}{4.5cm}
+
+    \customabstractsimpletable{\csname htblagkr@abstract@heading#1@results\endcsname}{\csname results#1\endcsname}{5.5cm}
+
     \clearpage
+
+    \customabstractsimpletable{\csname htblagkr@abstract@heading#1@overviewpicture\endcsname}{\csname overviewpicture#1\endcsname}{16.5cm}
+
+    \customabstractsimpletable{\csname htblagkr@abstract@heading#1@awardparticipation\endcsname}{\csname awardparticipation#1\endcsname}{2cm}
+
+    \customabstractsimpletable{\csname htblagkr@abstract@heading#1@accessibility\endcsname}{\csname accessibility#1\endcsname}{2cm}
+
+    \begin{tabularx}{\textwidth}{|p{5cm}|X|X|}
+        \hline
+        \textbf{\csname htblagkr@abstract@heading#1@approval\endcsname \newline (\csname htblagkr@abstract@heading#1@datesignature\endcsname)} & \scriptsize \csname htblagkr@abstract@heading#1@examiner\endcsname \vspace{1cm} & \scriptsize \csname htblagkr@abstract@heading#1@headofdepartment\endcsname \vspace{1cm} \\
+        \hline
+    \end{tabularx}
+
+    \clearpage
+}
+
+\NewDocumentCommand{\endcustomabstract}{}{
+    \customabstractpage{DE}
+    \customabstractpage{EN}
 }
 
 \RenewDocumentEnvironment{abstract}{}{\begincustomabstract}{\endcustomabstract}
@@ -494,7 +538,8 @@
     autogobble,
     breaklines,
     linenos,
-    tabsize=4
+    tabsize=4,
+    fontsize=\footnotesize
 }
 
 \NewDocumentCommand{\remapmintedlanguage}{mm}{
