@@ -23,6 +23,14 @@ NoStyle Extratitle
 NoStyle Address
 NoStyle Right_Address
 
+Provides hyperref 1
+
+# 4 layers of numbered headings
+SecNumDepth 4
+TocDepth 3
+
+Sides 1
+
 DefaultFont
     Family Sans
 EndFont
