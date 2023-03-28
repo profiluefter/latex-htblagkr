@@ -569,7 +569,7 @@
     tabsize=4,
     fontsize=\footnotesize,
     breakbefore={.},
-    breakafter={\_);, \{&},
+    breakafter={\_);, \{&/},
     python3=true % highlight as if it is python3 instead of python2, python2 shouldn't be used anymore anyways
 }
 
