@@ -325,7 +325,7 @@
 }
 
 \NewDocumentCommand{\customabstractmiddlecell}{m m}{
-    \parbox[c][#1][c]{\textwidth}{#2}
+    \parbox[c][#1][c]{9cm}{#2}
 }
 \NewDocumentCommand{\customabstractsimpletable}{m m m}{
     \begin{tabularx}{\textwidth}{|p{5cm}|X|}
