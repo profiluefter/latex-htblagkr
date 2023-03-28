@@ -356,7 +356,7 @@
         \hline
         \textbf{\csname htblagkr@abstract@heading#1@topic\endcsname}             & \customabstractmiddlecell{15mm}{\@title}             \\
         \hline
-        \textbf{\csname htblagkr@abstract@heading#1@partnercompany\endcsname}                & \customabstractmiddlecell{10mm}{\the\partnercompany} \\
+        \textbf{\csname htblagkr@abstract@heading#1@partnercompany\endcsname}                & \customabstractmiddlecell{20mm}{\the\partnercompany} \\
         \hline
     \end{tabularx}
 
