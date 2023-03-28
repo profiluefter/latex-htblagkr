@@ -436,6 +436,9 @@
 % only exists if loaded outside (e.g. when using LyX and defining naustrian language) so ignore if language is not loaded
 \defcaptionname{naustrian}{\figurename}{Abb.}
 
+% center all figures
+\g@addto@macro\@floatboxreset\centering
+
 % ========
 % GLOSSARY
 % ========
