@@ -403,10 +403,27 @@
 \RequirePackage[hidelinks]{hyperref}
 
 % options from scrguide.pdf page 75
-\KOMAoptions{toc=listof, sectionentrydots=true}
+\KOMAoptions{toc=bibliography, toc=listof, sectionentrydots=true}
 
-% less spacing in dots
-%\setkomafont{chapterentrydots}{\usekomafont{disposition}}
+% see scrguide.pdf page 415 table 15.1
+\RequirePackage{tocbasic}
+\DeclareTOCStyleEntry[
+    entryformat=\normalfont\bfseries\fontsize{13pt}{13pt}\selectfont,
+    numsep=2em, % doesn't work???
+    dynnumwidth=false
+]{tocline}{section}
+\DeclareTOCStyleEntry[
+    entryformat=\normalfont\fontsize{11pt}{11pt}\selectfont,
+    numsep=2em,
+    dynnumwidth=false
+]{tocline}{subsection}
+\DeclareTOCStyleEntry[
+    entryformat=\normalfont\fontsize{10pt}{10pt}\selectfont,
+    numsep=2em,
+    dynnumwidth=false
+]{tocline}{subsubsection}
+
+\renewcommand\@dotsep{0.5}
 
 % =======
 % FIGURES
@@ -416,7 +433,7 @@
 % use abbreviated prefixes
 \KOMAoptions{listof=entryprefix}
 \renewcaptionname{ngerman}{\figurename}{Abb.}
-% only exists if loaded outside (e.g. when using LyX) so ignore if language is not loaded
+% only exists if loaded outside (e.g. when using LyX and defining naustrian language) so ignore if language is not loaded
 \defcaptionname{naustrian}{\figurename}{Abb.}
 
 % ========
