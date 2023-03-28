@@ -302,6 +302,7 @@
 }
 
 \NewDocumentCommand{\begincustomabstract}{}{
+    \createcustomabstractcommand{customtitle}
     \createcustomabstractcommand{task}
     \createcustomabstractcommand{implementation}
     \createcustomabstractcommand{results}
@@ -354,7 +355,7 @@
         \hline
         \textbf{\csname htblagkr@abstract@heading#1@schoolyear\endcsname}        & \customabstractmiddlecell{10mm}{\the\schoolyear}     \\
         \hline
-        \textbf{\csname htblagkr@abstract@heading#1@topic\endcsname}             & \customabstractmiddlecell{15mm}{\@title}             \\
+        \textbf{\csname htblagkr@abstract@heading#1@topic\endcsname}             & \customabstractmiddlecell{15mm}{\csname customtitle#1\endcsname}             \\
         \hline
         \textbf{\csname htblagkr@abstract@heading#1@partnercompany\endcsname}                & \customabstractmiddlecell{20mm}{\the\partnercompany} \\
         \hline
