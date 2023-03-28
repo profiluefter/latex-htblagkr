@@ -524,6 +524,12 @@
     afterskip=12bp
 ]{paragraph}
 
+% forces the font to really be Calibri instead of Latin Modern
+\addtokomafont{section}{\rmfamily\bfseries\fontsize{16pt}{18pt}\selectfont}
+\addtokomafont{subsection}{\rmfamily\bfseries\fontsize{14pt}{18pt}\selectfont}
+\addtokomafont{subsubsection}{\rmfamily\bfseries\fontsize{12pt}{18pt}\selectfont}
+\addtokomafont{paragraph}{\rmfamily\bfseries\fontsize{11pt}{12pt}\selectfont}
+
 % begin new page for each section
 % https://tex.stackexchange.com/a/606812/229138
 \AddToHook{cmd/section/before}{\clearpage}
