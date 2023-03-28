@@ -312,6 +312,7 @@
 }
 
 \NewDocumentCommand{\customabstractheader}{m}{
+    \vspace{-7mm}
     \begin{tabularx}{\textwidth}{|p{4cm}|X p{6.5cm}|}
         \hline
 
