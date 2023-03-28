@@ -565,7 +565,10 @@
     breaklines,
     linenos,
     tabsize=4,
-    fontsize=\footnotesize
+    fontsize=\footnotesize,
+    breakbefore={.},
+    breakafter={\_);, \{&},
+    python3=true % highlight as if it is python3 instead of python2, python2 shouldn't be used anymore anyways
 }
 
 \NewDocumentCommand{\remapmintedlanguage}{mm}{
@@ -577,3 +580,8 @@
     }
     \makeatother
 }
+
+% prevent red boxes created by syntax errors
+% can't test this right now however because I couldn't actually produce a syntax error
+% https://tex.stackexchange.com/a/343506/229138
+\AtBeginEnvironment{minted}{\renewcommand{\fcolorbox}[4][]{#4}}
