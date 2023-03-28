@@ -404,7 +404,7 @@
 \RequirePackage[hidelinks]{hyperref}
 
 % options from scrguide.pdf page 75
-\KOMAoptions{toc=bibliography, toc=listof, sectionentrydots=true}
+\KOMAoptions{toc=listof, sectionentrydots=true}
 
 % see scrguide.pdf page 415 table 15.1
 \RequirePackage{tocbasic}
