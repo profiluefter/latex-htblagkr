@@ -2,12 +2,11 @@
 %   - https://www.ctan.org/pkg/smartdiagram (powerpoint style smartart)
 %   - https://tex.stackexchange.com/a/533239/229138 (plantuml diagrams)
 %   - https://www.overleaf.com/learn/how-to/Writing_Markdown_in_LaTeX_Documents (markdown in latex)
-%   - https://mirror.ctan.org/macros/latex/contrib/microtype/ (to make documents look good or something)
 
 % TODO: prefix all internal commands and add an at character so that they won't conflict and can't be used unknowingly
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{htblagkr}[2022/06/23 Diplomarbeitsvorlage HTBLA Grieskirchen]
+\ProvidesClass{htblagkr}[2023/05/10 Diplomarbeitsvorlage HTBLA Grieskirchen]
 
 % defaults
 \LoadClass[
@@ -35,6 +34,9 @@
 \setmainfont{Calibri}
 % consolas for codeblocks, monospaced Calibri is an experience...
 \setmonofont{Consolas}
+
+% enable typographical refinements
+\RequirePackage{microtype}
 
 % german
 \RequirePackage[ngerman]{babel}
