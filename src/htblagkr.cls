@@ -92,7 +92,8 @@
 
 \NewDocumentCommand{\DefaultDiplPageStyle}{}{
     \clearpairofpagestyles
-    \ohead{\headmark}
+    % set font again to prevent being monospace near codeblocks
+    \ohead{\normalfont\fontsize{9pt}{9pt}\selectfont\headmark}
 
     \ifoot{\ifthenelse{\equal{\@istitleset}{true}}{\@title}{}}
     \ofoot{\ifthenelse{\equal{\@ispagenumberactive}{true}}{\pagemark}{}}
